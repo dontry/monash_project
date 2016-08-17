@@ -1,2 +1,2 @@
-This is a personal project for my school assignment
-
+# monash_project
+monash programming project
