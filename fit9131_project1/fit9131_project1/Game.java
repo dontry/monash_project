@@ -1,9 +1,9 @@
 
 /**
  * Write a description of class Game here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is a Guessing Lucky Number Project.
+ * @author (Don) 
+ * @version (0.8)
  */
 import java.util.*;
 
@@ -13,6 +13,8 @@ public class Game
     private static final int TYPE_WON = 1;
     private static final int TYPE_CONSOLATION = 2;
     private static final int TYPE_LOSS = 3;
+    private static final int MAX_NUM = 100;
+    private static final int MIN_NUM =  1;
 
     /**
      * Constructor for objects of class Game
@@ -30,7 +32,7 @@ public class Game
     {
         // initialise instance variables
        in = new Scanner(System.in);
-       generator = new LuckyNumberGenerator();
+       generator = new LuckyNumberGenerator(MIN_NUM, MAX_NUM);
        isDebug = debugMode;
     }
     
@@ -58,8 +60,9 @@ public class Game
                         break;
                     case 5:
                         System.out.println("Goodbye. Thank you for playing.");
-                    default:
                         break;
+                    default:
+                        System.out.println("Invalid input. Please try again.");
                 }
             } catch(NullPointerException e) {
                 if(player == null)
@@ -72,11 +75,8 @@ public class Game
     
     private int chooseOption(boolean isInitial)
     {
-        if(isInitial) {
-            System.out.println("Welcome to the Guessing Game");
-        }else {
-            System.out.println("\n\nWelcome to the Guessing Game");
-        }
+        
+        System.out.println("\n\nWelcome to the Guessing Game");
         System.out.println("================================");
         System.out.println("(1)Change(or Set up) New Player");
         System.out.println("(2)Play One Round");
@@ -102,13 +102,19 @@ public class Game
             
         luckyNumber = generator.createNumber();
         round = 3;
-        System.out.print("\nEnter a number between 1-100(up to 3 guesses):");
         boolean successful = false;
+        
+        System.out.print("\nEnter a number between 1-100(up to 3 guesses):");
+        guessNumber = in.nextInt();
+        round--;
+        
         do {
-         guessNumber = in.nextInt();
          successful = determineNumber(guessNumber, luckyNumber);
+         if(successful)
+            break;
+         guessNumber = in.nextInt();
          round--;
-        }while(round > 0 && !successful );
+        }while(round > 0);
         
         getResult();
        
@@ -118,22 +124,17 @@ public class Game
         if(isDebug)
             System.out.println("The luckyNumber is:" + target);
             
-        if(number < 0 || number > 100) {
-            System.out.print("Sorry, only numbers between 1-100 are valid. Try again:");
+        if(number < MIN_NUM || number > MAX_NUM) {
+            System.out.print("Sorry, only numbers between " + MIN_NUM + "- " +
+                              MAX_NUM + " are valid. Try again:");
             return false;
-        }
-        
-        if(number < target) {
+        } else if(number < target) {
             System.out.print("Sorry, you need to go HIGHER:");
             return false;
-        }
-        
-        if(number > target) {
+        } else if(number > target) {
             System.out.print("Sorry, you need to go LOWER:");
             return false;
-        }
-        
-        if(number == target) {
+        } else if(number == target) {
            return true;
         }
         return false;
@@ -176,7 +177,7 @@ public class Game
             throw new NullPointerException();
             
         System.out.println("\nPlayer " + player.getName() + " has " + player.getWin() + " win(s) and " + player.getLoss() +
-                           " loss(es) ==> Winning Percentage = " + String.format("%2f", player.getPercentage()) + "%" );
+                           " loss(es) ==> Winning Percentage = " + String.format("%.2f", player.getPercentage()) + "%" );
         System.out.println("Total Winnings: $" + player.getMoney());
     }
     

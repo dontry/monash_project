@@ -1,0 +1,11 @@
+-- OT5_drop_seq.sql
+-- Student ID: 
+-- Student Name:
+
+set echo on;
+-- Write your code below
+
+
+
+
+set echo off;

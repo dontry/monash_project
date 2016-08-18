@@ -5,14 +5,25 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
+import java.util.Random;
+
 public class LuckyNumberGenerator
 {
+    private Random rand;
+    private int min;
+    private int max;
     /**
      * Constructor for objects of class LuckyNumberGenerator
      */
     public LuckyNumberGenerator()
     {
         // initialise instance variable
+    }
+    
+    public LuckyNumberGenerator(int newMin, int newMax)
+    {
+        min = newMin;
+        max = newMax;
     }
 
     /**
@@ -23,7 +34,7 @@ public class LuckyNumberGenerator
      */
     public int createNumber()
     {
-        // put your code here
-        return (int) (Math.random() * 100);
+       int randomNum = rand.nextInt((max - min) + 1) + min;
+       return randomNum;
     }
 }
