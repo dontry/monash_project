@@ -66,7 +66,9 @@ public class Game
                 }
             } catch(NullPointerException e) {
                 if(player == null)
-                System.out.println("Error: player has not been set up");
+                    System.out.println("Error: player has not been set up");
+                else
+                    System.out.println("Erro: NullPointerException occurs");
             }
         }
         return false;

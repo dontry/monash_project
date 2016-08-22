@@ -4,7 +4,8 @@
 
 set echo on;
 -- Write your code below
-
+DROP SEQUENCE LOCATION_SEQ;
+DROP SEQUENCE TRIP_SEQ;
 
 
 

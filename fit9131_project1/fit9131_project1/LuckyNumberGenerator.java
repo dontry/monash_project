@@ -24,6 +24,7 @@ public class LuckyNumberGenerator
     {
         min = newMin;
         max = newMax;
+        rand = new Random();
     }
 
     /**
