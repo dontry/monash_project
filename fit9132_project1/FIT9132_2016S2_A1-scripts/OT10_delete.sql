@@ -5,6 +5,11 @@
 set echo on;
 
 -- Write your code below
+
+rem Because TABLE VEHICLE has dependencies(foreign keys) with 
+rem TABLE VEHICLE_FEATURE, TRIP, MAINT_REP,
+rem so we need to delete those dependent entries  first.
+
 DELETE FROM  VEHICLE_FEATURE
 WHERE VEH_VIN = 
     (SELECT VEH_VIN

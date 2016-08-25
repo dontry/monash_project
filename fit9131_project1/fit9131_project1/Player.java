@@ -11,7 +11,7 @@ public class Player
     private int win;
     private int loss;
     private String name;
-    private int money;
+    private int award;
 
     /**
      * Constructor for objects of class Player
@@ -21,15 +21,12 @@ public class Player
         // initialise instance variables
         win = 0;
         loss = 0;
-        money = 0;
+        award = 0;
         name = playerName;
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * Player's name getter
      */
     public String getName()
     {
@@ -37,44 +34,55 @@ public class Player
         return name;
     }
     
+    /**
+     * Player's loss getter
+     */
     public int getLoss() 
     {
         return loss;
     }
     
+    /**
+     * Player's win getter
+     */
     public int getWin()
     {
         return win;
     }
     
-    public double getPercentage() 
+
+    /**
+     * Player's award getter
+     */
+    public int getAward()
     {
-        if( win + loss == 0) 
-            return 0;
-        else 
-            return ((double)win / (win + loss)) * 100;
+        return award;
     }
     
-    public int getMoney()
-    {
-        return money;
-    }
-    
+    /**
+     * Increment loss count
+     */
     public void incrementLoss()
     {
         loss++;
     }
     
+    /**
+     * Increment win count
+     */
     public void incrementWin()
     {
         win++;
     }
     
-    public void addMoney(int m)
+    /**
+     * Change player's award according to result
+     */
+    public void addAward(int a)
     {
-        money += m;
-        if(money < 0) {
-            money = 0;
+        award += a;
+        if(award < 0) {
+            award = 0;
         }
     }
     

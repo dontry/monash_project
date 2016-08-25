@@ -29,7 +29,7 @@ COMMIT;
 
 
 INSERT INTO TRIP VALUES (
-  LOCATION_SEQ.NEXTVAL,
+  TRIP_SEQ.NEXTVAL,
   to_date ('09-08-2016 13:00','dd-mm-yyyy hh24:mi'),
   to_date ('09-08-2016 14:00','dd-mm-yyyy hh24:mi'),
   null,
@@ -53,7 +53,7 @@ INSERT INTO TRIP VALUES (
    
    
 INSERT INTO TRIP VALUES (
-    LOCATION_SEQ.NEXTVAL,
+    TRIP_SEQ.NEXTVAL,
     to_date ('08-08-2016 15:00','dd-mm-yyyy hh24:mi'),
     to_date ('08-08-2016 15:30','dd-mm-yyyy hh24:mi'),
     null,

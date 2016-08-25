@@ -15,9 +15,14 @@ WHERE VEH_VIN =
      WHERE VEH_REGONUMBER = 'LL50JMB'
     );
 
-SELECT to_char(TRIP_START_ACTUAL, 'dd-mm-yyyy hh12:mi'),
-       to_char(TRIP_END_ACTUAL, 'dd-mm-yyyy hh12:mi')
+rem check whether the trip table is updated
+SELECT TRIP_ID, to_char(TRIP_START_ACTUAL, 'dd-Mon-yyyy hh12:mi'),
+      to_char(TRIP_END_ACTUAL, 'dd-Mon-yyyy hh12:mi')
 FROM TRIP
-WHERE VEH_VIN = 'SB2252300ADT00644';
+WHERE  VEH_VIN = 
+    (SELECT VEH_VIN
+     FROM VEHICLE
+     WHERE VEH_REGONUMBER = 'LL50JMB'
+    );
 
 set echo off;

@@ -9,42 +9,48 @@ import java.util.*;
 
 public class Game
 {
-    // instance variables - replace the example below with your own
-    private static final int TYPE_WON = 1;
-    private static final int TYPE_CONSOLATION = 2;
-    private static final int TYPE_LOSS = 3;
-    private static final int MAX_NUM = 100;
-    private static final int MIN_NUM =  1;
+    /**
+     * Class constants
+     */
+    private static final int RESULT_WON = 1;   //RESULT_WON means player make a correct guess.
+    private static final int RESULT_CONSOLATION = 2; //RESULT_CONSOLATION means player's final guess is within 5 of lucky number
+    private static final int RESULT_LOSS = 3;   //RESULT_LOSS means player's make a wrong guess.
+    private static final int MAX_NUM = 100;  //The maximum number of lucky number
+    private static final int MIN_NUM =  1;  //The minimun number of lucky number
+    private static final int ROUND_COUNT = 3;   //The rounds player can play
 
+    /**
+     * Instance attributes
+     */
+    private LuckyNumberGenerator generator;
+    private Player player;
+    private Scanner in;
+    private boolean isDebug; //Debug mode config 
+    
+    
     /**
      * Constructor for objects of class Game
      */
-    private int luckyNumber;
-    private int guessNumber;
-    private LuckyNumberGenerator generator;
-    private Player player;
-    private int round;
-    private Scanner in;
-    private boolean isDebug;
-    
-    
-    public Game(boolean debugMode)
+    public Game(boolean debugMode)  //The debug mode shows the luckyNumber
     {
         // initialise instance variables
+       player = null;
+       generator = new LuckyNumberGenerator(MIN_NUM, MAX_NUM);  
        in = new Scanner(System.in);
-       generator = new LuckyNumberGenerator(MIN_NUM, MAX_NUM);
        isDebug = debugMode;
     }
     
-    
-    public boolean startGame() {
-        int option = 0;
-        boolean isFirst = true;
-        while(option != 5) {
-            try {
-                option = chooseOption(isFirst);
-                isFirst = false;
-                
+    /**
+     * The main body of Game
+     */
+    public boolean startGame() 
+    {
+        int option = 0;     //initialise the option
+ 
+        clearTerminal();
+        while (option != 5) {      //If the selected option is 5, then exit the game
+            try{
+                option = chooseOption();                
                 switch(option){
                     case 1:
                         setNewPlayer();
@@ -59,23 +65,24 @@ public class Game
                         displayHelp();
                         break;
                     case 5:
+                        exitGame();
                         System.out.println("Goodbye. Thank you for playing.");
                         break;
                     default:
-                        System.out.println("Invalid input. Please try again.");
+                        System.out.println("Invalid choices. Please try again.");
                 }
-            } catch(NullPointerException e) {
-                if(player == null)
-                    System.out.println("Error: player has not been set up");
-                else
-                    System.out.println("Erro: NullPointerException occurs");
+            }catch(NullPointerException e){
+                if(player == null || player.getName().equals(""))
+                    System.out.println(e.getMessage());
             }
         }
         return false;
     }
     
-    
-    private int chooseOption(boolean isInitial)
+    /**
+     * Display the options and get user's input
+     */
+    private int chooseOption()
     {
         
         System.out.println("\n\nWelcome to the Guessing Game");
@@ -86,11 +93,13 @@ public class Game
         System.out.println("(4)Display Game Help");
         System.out.println("(5)Exit Game");
         System.out.print("Choose an option:");
-        return in.nextInt();
         
+        return in.nextInt();  //what if I want to deal with MismatchException ?
     }
    
-    
+    /**
+     * Set up the new player
+     */
     private void setNewPlayer() {
         System.out.print("Enter Player's Name:");
         in.nextLine();
@@ -98,92 +107,151 @@ public class Game
         player = new Player(name);
     }
     
-    private void playOneRound() {
-        if(player == null) 
-            throw new NullPointerException();
+
+    /**
+     * Option 2: play one round
+     */
+    private void playOneRound() 
+    {
+        if (player == null || player.getName().equals("")) 
+            throw new NullPointerException("Error: player has not been set up!");
             
-        luckyNumber = generator.createNumber();
-        round = 3;
+        LuckyNumberGenerator generator = new LuckyNumberGenerator(MIN_NUM, MAX_NUM);
+        int luckyNumber = generator.createNumber();
+        int round = ROUND_COUNT;
+        int guessNumber = -999;
         boolean successful = false;
         
-        System.out.print("\nEnter a number between 1-100(up to 3 guesses):");
-        guessNumber = in.nextInt();
-        round--;
-        
         do {
-         successful = determineNumber(guessNumber, luckyNumber);
-         if(successful)
-            break;
+         if(round == ROUND_COUNT) {
+            System.out.print("\nEnter a number between 1-100(up to 3 guesses):");
+         }
+         else {
+            successful = checkNumber(luckyNumber, guessNumber);
+         }
          guessNumber = in.nextInt();
          round--;
-        }while(round > 0);
+        } while(round > 0 && !successful);
         
-        getResult();
+        getResult(luckyNumber, guessNumber);
        
     }
     
-    private boolean determineNumber(int number, int target) {
+    /**
+     * check if the value of guessing number is equal to lucky number
+     */
+    private boolean checkNumber(int luckyNum, int guessNum) 
+    {
         if(isDebug)
-            System.out.println("The luckyNumber is:" + target);
+            System.out.println("The luckyNumber is:" + luckyNum);
             
-        if(number < MIN_NUM || number > MAX_NUM) {
+        if(guessNum < MIN_NUM || guessNum > MAX_NUM) {
             System.out.print("Sorry, only numbers between " + MIN_NUM + "- " +
                               MAX_NUM + " are valid. Try again:");
             return false;
-        } else if(number < target) {
+        } else if(guessNum < luckyNum) {
             System.out.print("Sorry, you need to go HIGHER:");
             return false;
-        } else if(number > target) {
+        } else if(guessNum > luckyNum) {
             System.out.print("Sorry, you need to go LOWER:");
             return false;
-        } else if(number == target) {
+        } else if(guessNum == luckyNum) {
            return true;
         }
         return false;
     }
     
-    private void getResult(){
-        System.out.println("\n\nThe Luck Number was:" + luckyNumber + ", your final guess was:" + guessNumber);
-        int resultType = 0;
+    
+    /**
+     * Get the final guess result and gain award accordingly
+     */
+    private void getResult(int luckyNum, int guessNum)
+    {
+        System.out.println("\n\nThe Luck Number was:" + luckyNum + ", your final guess was:" + guessNum);
+        int result;
         int award = 0;
-        if(Math.abs(luckyNumber - guessNumber) <= 5) {
-            if(luckyNumber == guessNumber) {
+        
+        
+        if(luckyNum == guessNum) {
                 award = 10;
-                resultType = TYPE_WON;
-            }else {
+                result = RESULT_WON;
+                player.incrementWin();
+        }else if(Math.abs(luckyNum - guessNum) <= 5) {
                 award = (int) (Math.random() * 5);
-                resultType = TYPE_CONSOLATION;
-            }
-            player.incrementWin();
+                result = RESULT_CONSOLATION;
+                player.incrementWin();
        }else {
             award = -1;
             player.incrementLoss();
-            resultType = TYPE_LOSS;
+            result = RESULT_LOSS;
         }
-        player.addMoney(award);
+        player.addAward(award);
         
-        switch(resultType) {
-            case TYPE_WON:
+        /**
+         * Display the result depending on different situations
+         */
+        switch(result) {
+            case RESULT_WON:
                    System.out.println("Congratulations: you WON $" + award);
                    break;
-            case TYPE_CONSOLATION:
+            case RESULT_CONSOLATION:
                    System.out.println("Congratulations: you WON a consolation of $" + award);
                    break;
-            case TYPE_LOSS:
+            case RESULT_LOSS:
                    System.out.println("Sorry, better luck next time!");
         }
     }
     
-    private void displayStatistics() {
-        if(player == null) 
-            throw new NullPointerException();
+    /**
+     * Display the player statistics
+     */
+    private void displayStatistics() 
+    {
+        if(player == null || player.getName().equals("")) 
+            throw new NullPointerException("Error: player has not been set up!");
             
         System.out.println("\nPlayer " + player.getName() + " has " + player.getWin() + " win(s) and " + player.getLoss() +
-                           " loss(es) ==> Winning Percentage = " + String.format("%.2f", player.getPercentage()) + "%" );
-        System.out.println("Total Winnings: $" + player.getMoney());
+                           " loss(es) ==> Winning Percentage = " + String.format("%.2f", getWinPercentage()) + "%" );
+        System.out.println("Total Winnings: $" + player.getAward());
     }
     
-    private void displayHelp() {
-        System.out.println("Game help.");
+    /**
+     * Display the game help
+     */
+    private void displayHelp() 
+    {
+        System.out.println("==================================");
+        System.out.println("         Game help");
+        System.out.println("a player to guess a number between 1-100, which will then be compared to a number (also between 1-100) randomly generated by the computer.\n"
+          + "For each \"round\" of the game, the player will have 3 chances to guess the number. Correct guesses will win some money, while incorrect guesses will attract some penalties.");
+    }
+    
+    /**
+     * Exit the game and clear the data;
+     */
+    private void exitGame()
+    {
+        player = null;
+        generator = null;
+        clearTerminal();
+    }
+    
+    /**
+     * Caculate the player's winning percentage
+     */
+    private double getWinPercentage() 
+    {
+        int win = player.getWin();
+        int loss = player.getLoss();
+        
+        if( win + loss == 0) 
+            return 0;
+        else 
+            return ((double)win / (win + loss)) * 100;
+    }
+    
+    private void clearTerminal()
+    {
+        System.out.print('\u000C');
     }
 }
