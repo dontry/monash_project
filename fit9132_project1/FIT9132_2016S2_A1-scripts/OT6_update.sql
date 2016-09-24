@@ -6,8 +6,8 @@
 set echo on;
 -- Write your code below
 UPDATE  TRIP  
-SET TRIP_START_ACTUAL = to_date('8-August-2016 8:00', 'dd-Mon-yyyy hh12:mi'), 
-    TRIP_END_ACTUAL = to_date('8-August-2016 9:00', 'dd-Mon-yyyy hh12:mi'), 
+SET TRIP_START_ACTUAL = to_date('8-August-2016 8:00', 'dd-Mon-yyyy hh24:mi'), 
+    TRIP_END_ACTUAL = to_date('8-August-2016 9:00', 'dd-Mon-yyyy hh24:mi'), 
     TRIP_START_KM = 9880, TRIP_END_KM = 10000
 WHERE VEH_VIN = 
     (SELECT VEH_VIN
@@ -22,7 +22,8 @@ FROM TRIP
 WHERE  VEH_VIN = 
     (SELECT VEH_VIN
      FROM VEHICLE
-     WHERE VEH_REGONUMBER = 'LL50JMB'
+     WHERE VEH_REGONUMBER = 'LL50JMB' 
+     AND to_char(TRIP_START_DATE,'dd-Mon-yyy hh24:mi') = '8-August-2016 8:00'
     );
 
 set echo off;

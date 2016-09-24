@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.params=
+comment0.target=UserInput()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ userInput\n
+comment1.params=
+comment1.target=java.lang.String\ getLine()
+comment2.params=
+comment2.target=int\ getInt()
+numComments=3

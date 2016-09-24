@@ -1,9 +1,11 @@
 
 /**
- * Write a description of class LuckyNumberGenerator here.
+ * LuckNumberGenerator class is mainly
+ * used for generating lucky number in 
+ * the Game.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Don) 
+ * @version (0.9.2)
  */
 import java.util.Random;
 

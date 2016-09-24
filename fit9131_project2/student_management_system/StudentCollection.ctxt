@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=
+comment0.target=StudentCollection()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ StudentCollection\n
+comment1.params=stud
+comment1.target=void\ add(Student)
+comment2.params=studName
+comment2.target=boolean\ delete(java.lang.String)
+comment3.params=studName
+comment3.target=Student\ findByName(java.lang.String)
+comment4.params=
+comment4.target=java.util.HashMap\ listStudsBySubject()
+comment5.params=subject
+comment5.target=java.util.ArrayList\ getStudsBySubject(java.lang.String)
+comment6.params=
+comment6.target=java.util.ArrayList\ listAll()
+numComments=7

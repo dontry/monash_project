@@ -75,6 +75,6 @@ INSERT INTO TRIP VALUES (
      WHERE OFF_GIVENNAME = 'Andrew' AND OFF_FAMILYNAME = 'Gaze'),
     0023);
 
-COMMIT
+COMMIT;
 
 set echo off;

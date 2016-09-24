@@ -1,9 +1,13 @@
 
 /**
- * Write a description of class Player here.
+ * Player class stores the player info
+ * including how many times the player wins or loses,
+ * how much award the player wins.
+ * Other objects can get access its info by 
+ * invoke its getter or setter functions.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Don) 
+ * @version (1.0.1)
  */
 public class Player
 {
@@ -60,31 +64,26 @@ public class Player
     }
     
     /**
-     * Increment loss count
+     * Set loss count
      */
-    public void incrementLoss()
+    public void setWins(int w)
     {
-        loss++;
+        win = w;
     }
     
     /**
-     * Increment win count
+     * Set win count
      */
-    public void incrementWin()
+    public void setLosses(int l)
     {
-        win++;
+        loss = l;
     }
     
     /**
-     * Change player's award according to result
+     * Set player award
      */
-    public void addAward(int a)
+    public void setAward(int a)
     {
-        award += a;
-        if(award < 0) {
-            award = 0;
-        }
+        award = a;
     }
-    
-    
 }
