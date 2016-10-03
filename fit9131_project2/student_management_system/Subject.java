@@ -16,10 +16,21 @@ public class Subject
     public Subject()
     {
         // initialise instance variables
+       super();
     }
     
     public static String[] getSubjectOptions()
     {
         return SUBJECT_OPTIONS;
+    }
+    
+    public static boolean contains(String subject)
+    {
+        for(String option: SUBJECT_OPTIONS)
+        {
+            if(option.equals(subject.toUpperCase()))
+                return true;
+        }
+        return false;
     }
 }

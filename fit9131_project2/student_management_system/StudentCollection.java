@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class StudentCollection here.
  * 
@@ -52,20 +51,20 @@ public class StudentCollection
         return null;
     }
     
-    public HashMap<String, ArrayList<Student>> listStudsBySubject()
+    public HashMap<String, ArrayList<Student>> listAllStudsBySubject()
     {
         HashMap<String, ArrayList<Student>> subjectList = new HashMap<String, ArrayList<Student>>();
         
         for(String subject: Subject.getSubjectOptions())
         {
-            ArrayList<Student> studList = getStudsBySubject(subject);
+            ArrayList<Student> studList = listStudsBySubject(subject);
             subjectList.put(subject, studList);
         }
         return subjectList;
     }
     
     
-    public ArrayList<Student> getStudsBySubject(String subject)
+    public ArrayList<Student> listStudsBySubject(String subject)
     {
         ArrayList<Student> subjectStudList = new ArrayList<Student>();
         String subjectUp = subject.toUpperCase();

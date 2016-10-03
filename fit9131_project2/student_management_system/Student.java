@@ -47,7 +47,7 @@ public class Student
     public boolean setName(String newName)
     {
             newName = newName.trim();
-            if(isNameValidP(newName)) 
+            if(isNameValidReg(newName)) 
             {
                 name = newName;
                 return true;
@@ -55,27 +55,14 @@ public class Student
                 return false;
     }
     
-    private boolean isNameValid(String name)
-    {
-        String curName = name.trim();
-        
-        if (curName.length() == 0)
-            return false;
-        else if (!curName.contains(" "))
-            return false;
-        else
-            return true;
-            
-    }
-    
-    private static boolean isNameValidP(String name)
+    private static boolean isNameValidReg(String name)
     {
         return Pattern.matches(NAME_PATTERN, name);
     }
     
     public boolean setPhoneNum(String newPhoneNum)
     {
-        if(isPhoneValidP(newPhoneNum))
+        if(isPhoneValidReg(newPhoneNum))
         {
             phoneNum = newPhoneNum;
             return true;
@@ -84,49 +71,11 @@ public class Student
         }
    }
     
-    private boolean isPhoneValid(String phoneNum)
-    {
-        if(!checkDigitLength(phoneNum))
-            return false;
-        else if(!checkFirstDigit(phoneNum))
-            return false;
-        else if(!checkPhoneNumeric(phoneNum))
-            return false;
-        else
-            return true;
-    }
-    
-    private static boolean isPhoneValidP(String phoneNum)
+    private static boolean isPhoneValidReg(String phoneNum)
     {
         return Pattern.matches(PHONENUM_PATTERN, phoneNum);
     }
-    
-    private boolean checkPhoneNumeric(String phoneNum)
-    {
-        for(int i = 0; i < phoneNum.length(); i++)
-        {
-            if(phoneNum.charAt(i) < '0' || phoneNum.charAt(i) > '9')
-                return false;
-        }
-        return true;
-    }
-    
-    private boolean checkDigitLength(String phoneNum)
-    {
-        if(phoneNum.length() == PHONE_NUM_LENGTH)
-            return true;
-        else
-            return false;
-    }
-    
-    private boolean checkFirstDigit(String phoneNum)
-    {
-        if(phoneNum.charAt(0) == FIRST_PHONE_DIGIT)
-            return true;
-        else
-            return false;
-    }
-    
+     
     public boolean setSubject(String newSubject)
     {
         if(isSubjectValid(newSubject)) {
@@ -157,6 +106,6 @@ public class Student
     
     public static boolean isArgumentValid(String newName, String newPhoneNum, String newSubject)
     {
-        return isNameValidP(newName) && isPhoneValidP(newPhoneNum) && isSubjectValid(newSubject);
+        return isNameValidReg(newName) && isPhoneValidReg(newPhoneNum) && isSubjectValid(newSubject);
     }
 }

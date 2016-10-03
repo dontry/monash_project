@@ -16,7 +16,7 @@ public class studentManagementSystem
 {
     private static final int OPTION_EXIT = 6;
     private static final String DATABASE_FILENAME = "student.list";
-    private static final String DATA_PATTERN =  "(^\\w+? \\w+?),(\\d+?),(\\w+?$)";
+    private static final String DATA_PATTERN =  "(^[\\w+? ]+?\\w+?),(\\d+?),(\\w+?$)";
     private StudentCollection studCollection;
     
     /**
@@ -25,25 +25,25 @@ public class studentManagementSystem
     public studentManagementSystem()
     {
         // initialise instance variables
-        studCollection = new StudentCollection();
     }
     
-    public boolean bootSystem()
+    public void runSystem()
     {
         int option = 0;
+        studCollection = new StudentCollection();
         initialSystem();
         while(option != OPTION_EXIT) {
             displayOptions();
             option = chooseOption();
             executeOption(option);
         }
-        return false;
     }
      
     private void initialSystem()
     {
         String line = "";
         clearTerminal();
+        System.out.println("-------Welcome to Stuedent Management System------");
         try {
             FileReader fileReader = new FileReader(DATABASE_FILENAME);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -66,6 +66,7 @@ public class studentManagementSystem
         if(m.find()){
             Student student = new Student(m.group(1), m.group(2), m.group(3));
             studCollection.add(student);
+            //student.displayInfo();
         }else {
             System.out.println("NO MATCH");
         }
@@ -83,7 +84,7 @@ public class studentManagementSystem
             fop.write(contentInBytes);
             fop.flush();
             fop.close();
-            System.out.println("Database has updated.");
+            System.out.println("Database updated.");
         } catch(IOException ex) {
             ex.printStackTrace();
         } finally {
@@ -116,7 +117,7 @@ public class studentManagementSystem
         System.out.println("(4) List Students By Subject");
         System.out.println("(5) List All Students");
         System.out.println("(6) Exit System");
-        System.out.print("Your option: ");
+        System.out.print("Enter Your option: ");
     }
     
     
@@ -128,7 +129,6 @@ public class studentManagementSystem
             option = in.getInt();
             return option;
         } catch(Exception ex) {
-            System.out.println(ex.getMessage());
             return -1;
         }
     }
@@ -156,7 +156,8 @@ public class studentManagementSystem
                 exitSystem();
                 break;
             default:
-                System.out.print("Invalid option. Please try again.");
+                System.out.println("\nInvalid option. Please try again.");
+                break;
         }
    }
    
@@ -165,7 +166,7 @@ public class studentManagementSystem
        UserInput in = new UserInput();
        String studName, studNum, studSubject;
        
-       System.out.println("\n------Add a new Student-----------");
+       System.out.println("\n--------Add a new Student-----------\n");
        System.out.print("Please input student's name: ");
        studName =  in.getLine();
        
@@ -176,17 +177,19 @@ public class studentManagementSystem
        studSubject = in.getLine();
        
        try {
-           if(Student.isArgumentValid(studName, studNum, studSubject)) {
+           if(!Student.isArgumentValid(studName, studNum, studSubject)) {
+               throw new Exception("\nError: Invalid student profile.");
+            } else if(studCollection.findByName(studName) != null) {
+               throw new Exception("\nError: Student " + studName+ " has already existed.");
+            } else {
                Student newStudent = new Student(studName, studNum, studSubject);
                studCollection.add(newStudent);
-               System.out.println("Success: New student added");
-               newStudent.displayInfo();
+               System.out.println("\nSuccess: A new student added.");
                return true;
-            } else {
-                throw new Exception();
             }
         } catch(Exception ex) {
-            System.out.println("Failure: Invalid student info");
+            System.out.println(ex.getMessage());
+            System.out.println("\nFailure: Student added failed.");
             return false;
         }
    }
@@ -196,14 +199,20 @@ public class studentManagementSystem
        UserInput in = new UserInput();
        String studName;
        
+       System.out.println("\n--------Delete A Student-----------\n");
        System.out.print("Pease input the student's name you want to delete: ");
        studName = in.getLine();
        
        try {
-           studCollection.delete(studName);
-           System.out.println("Success: Student deleted");
-           return true;
+           if(studCollection.findByName(studName) != null) {
+               studCollection.delete(studName);
+               System.out.println("\nSuccess: Student is deleted.");
+               return true;
+            } else {
+               throw new Exception("\nError: Student cannot found.");
+            }
        } catch(Exception ex) {
+           System.out.println(ex.getMessage());
            System.out.println("Failure: Student deletion failed");
            return false;
        }
@@ -213,43 +222,47 @@ public class studentManagementSystem
    {
        UserInput in = new UserInput();
        String queryName;
-       System.out.println("\n------------Find the student by name:------------");
+       System.out.println("\n--------Find The Student by Name-------\n");
        System.out.print("Please input the name:");
        queryName = in.getLine();
        
        
        try {
-           System.out.println("\n----------Find student by name-------------");
            Student stud = studCollection.findByName(queryName);
            if(stud != null)
            {
-               System.out.print("Find the student:");
+               System.out.print("\nQuery result: ");
                stud.displayInfo();
            }else {
-               System.out.println("Cannot find the student with name " + queryName);
+               throw new Exception("Failure: Ttudent with name " + queryName + " not found.");
            }
            return true;
        } catch(Exception ex) {
+          System.out.println(ex.getMessage());
           return false;
        }
    }
    
    private boolean listStudentsBySubject()
    {
+       String subject = "";
+       UserInput in = new UserInput();
+
+       System.out.println("\n----------List Students by Subject-------------\n");
+       System.out.print("Please input your query subject: ");
+       subject = in.getLine();
        try {
-         System.out.println("\n-------------List Students by Subject-------------");
-         HashMap<String, ArrayList<Student>> list = studCollection.listStudsBySubject();
-         for(String subject: Subject.getSubjectOptions())
+         if(!Subject.contains(subject))
+            throw new Exception("\nError:No subject" + subject + " found.");   
+         ArrayList<Student> studList = studCollection.listStudsBySubject(subject);        
+         System.out.println("\nQuery result:");
+         for(Student student: studList)
          {
-             ArrayList<Student> studList = list.get(subject);
-             System.out.println(subject + ":");
-             for(Student student: studList)
-             {
-                 student.displayInfo();
-             }
+             student.displayInfo();
          }
          return true;
        } catch(Exception ex) {
+           System.out.println(ex.getMessage());
            return false;
        }
    }
@@ -257,7 +270,7 @@ public class studentManagementSystem
    private boolean listAllStudents()
    {
        try {
-           System.out.println("\n----------List All Students-------------");
+           System.out.println("\n----------List All Students-------------\n");
            for(Student student: studCollection.listAll())
            {
                student.displayInfo();
@@ -279,5 +292,6 @@ public class studentManagementSystem
         writeToFile(data);
         studCollection = null;
         clearTerminal();
+        System.out.println("Exit System");
     }
 }
