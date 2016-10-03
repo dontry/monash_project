@@ -50,74 +50,17 @@ public class studentManagementSystem
         String line = "";
         clearTerminal();
         System.out.println("-------Welcome to Stuedent Management System------");
-        try {
-            FileReader fileReader = new FileReader(DATABASE_FILENAME);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while((line = bufferedReader.readLine()) != null)
-            {
-                readData(line);
-            }
-            bufferedReader.close();
-            fileReader.close();
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        }
-        
-    }
-    
-    private void readData(String line)
-    {
-        Pattern reg = Pattern.compile(DATA_PATTERN);
-        Matcher m = reg.matcher(line);
-        if(m.find()){
-            String studName = m.group(1);
-            String studPhone = m.group(2);
-            String studSubject = m.group(3);
-            Student student = new Student(studName, studPhone, studSubject);
-            studCollection.add(student);
-            Subject subject = subjectMap.get(studSubject.toUpperCase());
-            subject.add(student);
-            //student.displayInfo();
-        }else {
-            System.out.println("NO MATCH");
-        }
-    }
-    
-    private void writeToFile(String lines)
-    {
-        FileOutputStream fop =null;
-        File file;
-        try {
-            file = new File(DATABASE_FILENAME);
-            fop = new FileOutputStream(file);
-            
-            byte[] contentInBytes = lines.getBytes();
-            fop.write(contentInBytes);
-            fop.flush();
-            fop.close();
-            System.out.println("Database updated.");
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if(fop != null) {
-                    fop.close();
-                }
-            } catch(IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-    
-    private String writeData()
-    {
-        String lines = "";
-        for(Student student: studCollection.listAll())
+        FileIO fileIO = new FileIO();
+        ArrayList<Student> studList = fileIO.readStudentFile(DATABASE_FILENAME,DATA_PATTERN);
+        for(Student stud: studList)
         {
-            lines += student.toString() + "\n";
+            studCollection.add(stud);
+            Subject subject = subjectMap.get(stud.getSubject().toUpperCase());
+            subject.add(stud);
         }
-        return lines;
     }
+    
+    
     
     private void displayOptions()
     {
@@ -305,8 +248,8 @@ public class studentManagementSystem
     
     private void exitSystem()
     {
-        String data = writeData();
-        writeToFile(data);
+        FileIO fileIO = new FileIO();
+        fileIO.writeToFile(DATABASE_FILENAME, studCollection.listAll());
         studCollection = null;
         clearTerminal();
         System.out.println("Exit System");
