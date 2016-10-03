@@ -88,7 +88,7 @@ public class Student
     private static boolean isSubjectValid(String subject)
     {
         String subjectUp = subject.toUpperCase();
-        if(Arrays.asList(Subject.getSubjectOptions()).contains(subjectUp))
+        if(Arrays.asList(Subject.getAllSubjects()).contains(subjectUp))
             return true;
         else
             return false;

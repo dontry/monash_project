@@ -5,7 +5,7 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Subject
+public class Subject extends StudentCollection
 {
     // instance variables - replace the example below with your own
     private static final String[] SUBJECT_OPTIONS = new String[] {"MATHS", "COMPUTING", "ENGLISH"};
@@ -19,7 +19,7 @@ public class Subject
        super();
     }
     
-    public static String[] getSubjectOptions()
+    public static String[] getAllSubjects()
     {
         return SUBJECT_OPTIONS;
     }

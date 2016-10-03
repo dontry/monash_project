@@ -27,16 +27,15 @@ public class StudentCollection
         studentList.add(stud);
     }
     
-    public boolean delete(String studName)
+    public boolean delete(Student stud)
     {
-        Student stud = findByName(studName);
-        if(stud != null)
-        {
+        try {
             studentList.remove(stud);
-        } else {
             return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
-        return false;
     }
     
     public Student findByName(String studName)
@@ -51,31 +50,31 @@ public class StudentCollection
         return null;
     }
     
-    public HashMap<String, ArrayList<Student>> listAllStudsBySubject()
-    {
-        HashMap<String, ArrayList<Student>> subjectList = new HashMap<String, ArrayList<Student>>();
-        
-        for(String subject: Subject.getSubjectOptions())
-        {
-            ArrayList<Student> studList = listStudsBySubject(subject);
-            subjectList.put(subject, studList);
-        }
-        return subjectList;
-    }
-    
-    
-    public ArrayList<Student> listStudsBySubject(String subject)
-    {
-        ArrayList<Student> subjectStudList = new ArrayList<Student>();
-        String subjectUp = subject.toUpperCase();
-        for(Student curStud: studentList)
-        {
-            String curSubjectUp = curStud.getSubject().toUpperCase();
-            if(curSubjectUp.equals(subjectUp))
-                subjectStudList.add(curStud);
-        }
-        return subjectStudList;
-    }
+//     public HashMap<String, ArrayList<Student>> listAllStudsBySubject()
+//     {
+//         HashMap<String, ArrayList<Student>> subjectList = new HashMap<String, ArrayList<Student>>();
+//         
+//         for(String subject: Subject.getSubjectOptions())
+//         {
+//             ArrayList<Student> studList = listStudsBySubject(subject);
+//             subjectList.put(subject, studList);
+//         }
+//         return subjectList;
+//     }
+//     
+//     
+//     public ArrayList<Student> listStudsBySubject(String subject)
+//     {
+//         ArrayList<Student> subjectStudList = new ArrayList<Student>();
+//         String subjectUp = subject.toUpperCase();
+//         for(Student curStud: studentList)
+//         {
+//             String curSubjectUp = curStud.getSubject().toUpperCase();
+//             if(curSubjectUp.equals(subjectUp))
+//                 subjectStudList.add(curStud);
+//         }
+//         return subjectStudList;
+//     }
     
     public ArrayList<Student> listAll()
     {

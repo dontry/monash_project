@@ -18,7 +18,7 @@ public class studentManagementSystem
     private static final String DATABASE_FILENAME = "student.list";
     private static final String DATA_PATTERN =  "(^[\\w+? ]+?\\w+?),(\\d+?),(\\w+?$)";
     private StudentCollection studCollection;
-    
+    private HashMap<String, Subject> subjectMap;
     /**
      * Constructor for objects of class studentManagementSystem
      */
@@ -31,6 +31,12 @@ public class studentManagementSystem
     {
         int option = 0;
         studCollection = new StudentCollection();
+        subjectMap = new HashMap<String, Subject>();
+        for(String subject: Subject.getAllSubjects())
+        {
+            subjectMap.put(subject, new Subject());
+        }
+        
         initialSystem();
         while(option != OPTION_EXIT) {
             displayOptions();
@@ -64,8 +70,13 @@ public class studentManagementSystem
         Pattern reg = Pattern.compile(DATA_PATTERN);
         Matcher m = reg.matcher(line);
         if(m.find()){
-            Student student = new Student(m.group(1), m.group(2), m.group(3));
+            String studName = m.group(1);
+            String studPhone = m.group(2);
+            String studSubject = m.group(3);
+            Student student = new Student(studName, studPhone, studSubject);
             studCollection.add(student);
+            Subject subject = subjectMap.get(studSubject.toUpperCase());
+            subject.add(student);
             //student.displayInfo();
         }else {
             System.out.println("NO MATCH");
@@ -110,6 +121,7 @@ public class studentManagementSystem
     
     private void displayOptions()
     {
+        System.out.println("---------------------------------");
         System.out.println("\nPlease select an Option below:");
         System.out.println("(1) Add a new student");
         System.out.println("(2) Delete a student");
@@ -184,6 +196,8 @@ public class studentManagementSystem
             } else {
                Student newStudent = new Student(studName, studNum, studSubject);
                studCollection.add(newStudent);
+               Subject subject = subjectMap.get(studSubject.toUpperCase());
+               subject.add(newStudent);
                System.out.println("\nSuccess: A new student added.");
                return true;
             }
@@ -204,8 +218,11 @@ public class studentManagementSystem
        studName = in.getLine();
        
        try {
-           if(studCollection.findByName(studName) != null) {
-               studCollection.delete(studName);
+           Student student = studCollection.findByName(studName);
+           if(student != null) {
+               Subject subject = subjectMap.get(student.getSubject().toUpperCase());
+               studCollection.delete(student);
+               subject.delete(student);
                System.out.println("\nSuccess: Student is deleted.");
                return true;
             } else {
@@ -245,18 +262,18 @@ public class studentManagementSystem
    
    private boolean listStudentsBySubject()
    {
-       String subject = "";
+       String subjectStr = "";
        UserInput in = new UserInput();
 
        System.out.println("\n----------List Students by Subject-------------\n");
        System.out.print("Please input your query subject: ");
-       subject = in.getLine();
+       subjectStr = in.getLine();
        try {
-         if(!Subject.contains(subject))
-            throw new Exception("\nError:No subject" + subject + " found.");   
-         ArrayList<Student> studList = studCollection.listStudsBySubject(subject);        
+         if(!Subject.contains(subjectStr))
+            throw new Exception("\nError:No subject" + subjectStr + " found.");   
+         Subject subject = subjectMap.get(subjectStr.toUpperCase());
          System.out.println("\nQuery result:");
-         for(Student student: studList)
+         for(Student student: subject.listAll())
          {
              student.displayInfo();
          }
