@@ -1,36 +1,45 @@
 
 /**
- * Write a description of class Subject here.
+ * A class of subject detail.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Dong Cai
+ * @version 2016.10.5
  */
-public class Subject extends StudentCollection
+public class Subject
 {
-    // instance variables - replace the example below with your own
-    private static final String[] SUBJECT_OPTIONS = new String[] {"MATHS", "COMPUTING", "ENGLISH"};
+    String subjectName;
 
     /**
-     * Constructor for objects of class Subject
+     * Constructor for objects of class Subject.
+     * Initializing subject name.
      */
-    public Subject()
+    public Subject(String newSubjectName)
     {
-        // initialise instance variables
-       super();
+        subjectName = capitalise(newSubjectName);
+    }
+
+    /**
+     * Get subject name.
+     * @return subject name.
+     */
+    public String getName()
+    {
+        return subjectName;
+    }
+
+    /**
+     * Set subject name.
+     */
+    public void setName(String newSubjectName)
+    {
+        subjectName = newSubjectName;
     }
     
-    public static String[] getAllSubjects()
+    /**
+     * Capitalise subject name.
+     */
+    private String capitalise(String subjectName)
     {
-        return SUBJECT_OPTIONS;
-    }
-    
-    public static boolean contains(String subject)
-    {
-        for(String option: SUBJECT_OPTIONS)
-        {
-            if(option.equals(subject.toUpperCase()))
-                return true;
-        }
-        return false;
+        return subjectName.substring(0,1).toUpperCase() + subjectName.substring(1).toLowerCase();
     }
 }

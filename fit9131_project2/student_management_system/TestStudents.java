@@ -6,6 +6,7 @@
  * @version (a version number or a date)
  */
 import static org.junit.Assert.*;
+import java.util.*;
 
 public class TestStudents
 {
@@ -23,6 +24,8 @@ public class TestStudents
     private final static String MSG_CORRECT_STUDENT = "TEST: Correct student.";
     private final static String MSG_TEST_PASSED = "  -- passed";
     private final static String MSG_TEST_FAILED = "  -- failed";
+    private final static String[] subjectArray = {"MATHS", "ENGLISH", "COMPUTING"};
+    private ArrayList<String> subjectList;
 //  private final static String MSG_UNEXPECTED_OUTPUT = "Unexpected output.";
     /**
      * Constructor for objects of class TestStudents
@@ -30,10 +33,16 @@ public class TestStudents
     Student student;
     public TestStudents() {
         clearTerminal();
-        student = new Student("","","");
+        student = new Student();
+        subjectList = new ArrayList<String>();
+        for(String subj: subjectArray)
+        {
+            subjectList.add(subj);
+        }
+        SubjectCollection.initSubjectOption(subjectList);
     }
    
-    private void testStudNameCorrect()
+    public void testStudNameCorrect()
     {
         String studName = "William Smith";
         try {
@@ -44,7 +53,7 @@ public class TestStudents
         }
     }
     
-    private void testStudNameBlank()
+    public void testStudNameBlank()
     {
        String studName = "";
        try {
@@ -55,7 +64,7 @@ public class TestStudents
        }
     }
     
-    private void testStudNameIllegalDigit()
+    public void testStudNameIllegalDigit()
     {
         String studName = "William123 Smith";
         try {
@@ -64,10 +73,9 @@ public class TestStudents
         } catch(AssertionError err) {
             System.out.println(err.getMessage() + MSG_TEST_FAILED);
         }
-       
     }
     
-    private void testStudNameNoSpace()
+    public void testStudNameNoSpace()
     {
         String studName = "WilliamSmith";
         try {
@@ -75,6 +83,8 @@ public class TestStudents
             System.out.println(MSG_NOSPACE_NAME + MSG_TEST_PASSED);
         } catch(AssertionError err) {
             System.out.println(err.getMessage() + MSG_TEST_FAILED);
+        } catch(Exception ex) {
+            ex.printStackTrace();
         }
     }
     
@@ -86,7 +96,7 @@ public class TestStudents
         testStudNameNoSpace();     
     }
     
-    private void testPhoneNumCorrect()
+    public void testPhoneNumCorrect()
     {
         String phoneNum = "912345678";
         try {
@@ -97,7 +107,7 @@ public class TestStudents
         }
     }
     
-    private void testPhoneNumBlank()
+    public void testPhoneNumBlank()
     {
         String phoneNum = "";
         try {
@@ -105,10 +115,12 @@ public class TestStudents
             System.out.println(MSG_BLANK_PHONUM + MSG_TEST_PASSED);
         } catch(AssertionError err) {
             System.out.println(err.getMessage() + MSG_TEST_FAILED);
+        } catch(Exception ex) {
+            ex.printStackTrace();
         }
     }
     
-    private void testPhoneNumNumeric()
+    public void testPhoneNumNumeric()
     {
         String phoneNum = "s13^22328";
         try {
@@ -119,7 +131,7 @@ public class TestStudents
         }
     }
     
-    private void testPhoneNumLength()
+    public void testPhoneNumLength()
     {
         String phoneNum = "92232";
         try {
@@ -130,7 +142,7 @@ public class TestStudents
         }
     }
     
-    private void testPhoneNumInitial()
+    public void testPhoneNumInitial()
     {
         String phoneNum = "499994448";
         try {
@@ -150,9 +162,9 @@ public class TestStudents
         testPhoneNumInitial();
     }
     
-    private void testSubjectCorrect()
+    public void testSubjectCorrect()
     {
-        String subject = "Math";
+        String subject = "Maths English";
         try {
             assertTrue(MSG_CORRECT_SUBJECT, student.setSubject(subject));
             System.out.println(MSG_CORRECT_SUBJECT + MSG_TEST_PASSED);
@@ -161,7 +173,7 @@ public class TestStudents
         }
     }
         
-    private void testSubjectIncorrect()
+    public void testSubjectIncorrect()
     {
         String subject = "Art";
         try {
@@ -182,10 +194,24 @@ public class TestStudents
     {
         String name = "William Smith";
         String phoneNum = "912345678";
-        String subject = "Math";
+        String subject = "Maths English";
         
         try {
-            new Student(name, phoneNum, subject);
+            Student student = new Student(name, phoneNum, subject);
+            System.out.println(MSG_CORRECT_STUDENT + MSG_TEST_PASSED);
+        } catch(Exception ex) {
+            System.out.println(ex.getMessage() + MSG_TEST_FAILED);
+        }
+    }
+    
+    public void testStudentIncorrect()
+    {
+        String name = "Eric Connor";
+        String phoneNum = "888888888";
+        String subject = "Computing";
+        
+        try {
+            Student student = new Student(name, phoneNum, subject);
             System.out.println(MSG_CORRECT_STUDENT + MSG_TEST_PASSED);
         } catch(Exception ex) {
             System.out.println(ex.getMessage() + MSG_TEST_FAILED);

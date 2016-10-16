@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=
+comment0.target=FileHandler()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ FileHandler\n
+comment1.params=filename
+comment1.target=java.util.ArrayList\ readFromFile(java.lang.String)
+comment1.text=\n\ Read\ data\ from\ file\n\ @param\ file\ name\n\ @return\ student\ list\n
+comment2.params=line
+comment2.target=Student\ readStudentData(java.lang.String)
+comment2.text=\n\ Read\ student\ data\ from\ line\n\ @param\ line\n\ @return\ student\ profile\n
+comment3.params=fileName\ lines
+comment3.target=void\ writeToFile(java.lang.String,\ java.lang.String)
+comment3.text=\n\ Write\ student\ data\ to\ file\ \n\ @param\ target\ file\ name,\ student\ list\n
+comment4.params=studList
+comment4.target=java.lang.String\ writeStudentData(java.util.ArrayList)
+comment4.text=\n\ Change\ student\ data\ into\ text\n\ @param\ student\ list\n\ @return\ text\ of\ all\ student\ data\n
+numComments=5

@@ -1,9 +1,11 @@
 #BlueJ class context
 comment0.params=
 comment0.target=UserInput()
-comment0.text=\n\ Constructor\ for\ objects\ of\ class\ userInput\n
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ userInput\n\ Initializing\ scanner\ object\n
 comment1.params=
 comment1.target=java.lang.String\ getLine()
+comment1.text=\n\ Get\ user\ input\ line.\n\ @return\ user\ input\ line.\n
 comment2.params=
 comment2.target=int\ getInt()
+comment2.text=\n\ Get\ user\ input\ integer.\n\ @return\ user\ input\ integer.\n
 numComments=3

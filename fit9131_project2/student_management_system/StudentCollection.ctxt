@@ -1,13 +1,19 @@
 #BlueJ class context
 comment0.params=
 comment0.target=StudentCollection()
-comment0.text=\n\ Constructor\ for\ objects\ of\ class\ StudentCollection\n
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ StudentCollection.\n\ Perform\ any\ initialization\ for\ the\ address\ book.\n
 comment1.params=stud
 comment1.target=void\ add(Student)
+comment1.text=\n\ Add\ student\ to\ student\ list.\n\ @param\ student\n
 comment2.params=stud
 comment2.target=boolean\ delete(Student)
+comment2.text=\n\ Delete\ student\ from\ student\ list.\n\ @param\ student.\n\ @return\ true\ if\ student\ exists\ and\ remove\ successful,\ false\ otherwise.\n
 comment3.params=studName
 comment3.target=Student\ findByName(java.lang.String)
+comment3.text=\n\ Find\ student\ by\ student\ name.\n\ @param\ student\ name.\n\ @return\ student.\n
 comment4.params=
-comment4.target=java.util.ArrayList\ listAll()
-numComments=5
+comment4.target=java.util.ArrayList\ getAll()
+comment4.text=\n\ Retrieving\ all\ student.\n\ @return\ student\ arrayList.\n
+comment5.params=subjects
+comment5.target=java.util.ArrayList\ searchBySubjects(java.lang.String[])
+numComments=6

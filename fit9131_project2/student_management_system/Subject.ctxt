@@ -1,9 +1,14 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Subject()
-comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Subject\n
+comment0.params=newSubjectName
+comment0.target=Subject(java.lang.String)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Subject.\n\ Initializing\ subject\ name.\n
 comment1.params=
-comment1.target=java.lang.String[]\ getAllSubjects()
-comment2.params=subject
-comment2.target=boolean\ contains(java.lang.String)
-numComments=3
+comment1.target=java.lang.String\ getName()
+comment1.text=\n\ Get\ subject\ name.\n\ @return\ subject\ name.\n
+comment2.params=newSubjectName
+comment2.target=void\ setName(java.lang.String)
+comment2.text=\n\ Set\ subject\ name.\n
+comment3.params=subjectName
+comment3.target=java.lang.String\ capitalise(java.lang.String)
+comment3.text=\n\ Capitalise\ subject\ name.\n
+numComments=4

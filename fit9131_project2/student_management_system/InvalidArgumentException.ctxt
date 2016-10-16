@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=arg
+comment0.target=InvalidArgumentException(java.lang.String)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ InvalidArgumentException\n\ Perform\ initialization\ of\ invalid\ argument\ name.\n
+comment1.params=
+comment1.target=java.lang.String\ getMessage()
+comment1.text=\n\ Get\ exception\ message.\n\ @return\ message.\n
+numComments=2

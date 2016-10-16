@@ -7,6 +7,6 @@ all he/she needs to know. The comments should usually include at least:
 PROJECT TITLE:
 PURPOSE OF PROJECT:
 VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
+HOW TO START THIS PROJECT: estantiate StudentMangementSystem and choose run system.
+AUTHORS: Dong Cai
 USER INSTRUCTIONS:
