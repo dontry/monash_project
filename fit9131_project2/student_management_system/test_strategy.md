@@ -112,7 +112,7 @@ Create a **Student** object with invalid attributes
 ![alt valid subject](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.02.48%20PM.png?raw=true)
 
 ---
-### SetName(String): boolean  -positive
+### setName(String): boolean  -positive
 
 ##### Test Data
 + name: "William Smith"
@@ -123,7 +123,7 @@ Create a **Student** object with invalid attributes
 ##### Actual Data
 ![alt set name positive](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.03.17%20PM.png?raw=true)
 
-### SetName(String): boolean -negative
+### setName(String): boolean -negative
 
 ##### Test Data
 + name: "William123 Smith"
@@ -134,7 +134,7 @@ Create a **Student** object with invalid attributes
 ##### Actual Data
 ![alt set name negative](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.03.46%20PM.png?raw=true)
 
-### SetPhoneNum(String): boolean -positive
+### setPhoneNum(String): boolean -positive
 
 ##### Test Data
 + phone: "987654321"
@@ -145,7 +145,7 @@ Create a **Student** object with invalid attributes
 ##### Actual Data
 ![alt set phone number positive](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.04.14%20PM.png?raw=true)
 
-### SetPhoneNum(String): boolean -negative
+### setPhoneNum(String): boolean -negative
 
 ##### Test Data
 + phone: "77700888"
@@ -156,7 +156,7 @@ Create a **Student** object with invalid attributes
 ##### Actual Data
 ![alt set phone number negative](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.04.40%20PM.png?raw=true)
 
-### SetSubjects(String): boolean -positive
+### setSubjects(String): boolean -positive
 
 ##### Test Data
 + subjects: "Maths Computing"
@@ -167,7 +167,7 @@ Create a **Student** object with invalid attributes
 ##### Actual Data
 ![alt set subjects positive](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.05.05%20PM.png?raw=true)
 
-### SetSubjects(String): boolean -negative
+### setSubjects(String): boolean -negative
 
 ##### Test Data
 + subjects: "Art Psychology"
