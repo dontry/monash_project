@@ -48,12 +48,10 @@ Create a **Student** object with the default constructor
 + subjects: SubjectCollection()
 
 ##### Actual Results:
-
 ![alt default contructor](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%203.26.23%20PM.png?raw=true)
 
 ### Test2
 Create a **Student** object with the non-default constructor
-
 ##### Test Data
 + name: "William Smith"
 + phoneNum: "912345678"
@@ -69,7 +67,6 @@ Create a **Student** object with the non-default constructor
 
 ### Test3
 Create a **Student** object with invalid attributes
-
 ##### Test Data
 + name: "Eric Connor"
 + phoneNum: "888888888"
@@ -84,7 +81,7 @@ Create a **Student** object with invalid attributes
 ----
 ## Student method tests
 ### Constructor
-##### Student("William Smith", "987654321", "English Maths")
++  Student("William Smith", "987654321", "English Maths")
 
 ### getName(): String
 
@@ -111,6 +108,15 @@ Create a **Student** object with invalid attributes
 
 ##### Actual Data
 ![alt valid subject](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.02.48%20PM.png?raw=true)
+
+### displayInfo()
+
+##### Expected Data
++ info: "William Smith,987654321,Englingsh Maths"
+
+##### Actual Data
+![alt display]()
+
 
 ---
 ### setName(String): boolean  -positive
