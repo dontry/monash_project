@@ -65,8 +65,10 @@ Create a **Student** object with invalid attributes
 + phoneNum: "888888888"
 + subject: "Computing"
 ##### Expected Results:
-![alt invalid attributes]()
++ Exception occurs
 ##### Actual Results:
+![alt invalid attributes](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.20.12%20PM.png?raw=true)
+
 ----
 ## Student method tests
 ### Constructor
