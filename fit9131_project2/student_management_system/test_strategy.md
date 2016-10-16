@@ -1,4 +1,5 @@
- # Test Strategy
+# Test Strategy
+
  This is a documentation which lists how we test class or program.
  ## Test Plan
  This is a summary of all the tests which will be eventually performed for the program.
