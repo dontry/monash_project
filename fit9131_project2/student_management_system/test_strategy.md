@@ -115,7 +115,7 @@ Create a **Student** object with invalid attributes
 + info: "William Smith,987654321,Englingsh Maths"
 
 ##### Actual Data
-![alt display]()
+![alt display](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.53.20%20PM.png?raw=true)
 
 
 ---
