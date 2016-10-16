@@ -45,7 +45,7 @@ Create a **Student** object with the default constructor
 + phoneNum: ""
 + subjects: SubjectCollection()
 ##### Actual Results:
-![alt text](file://documents/monash_projects)
+![alt default contructor](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%203.26.23%20PM.png?raw=true)
 ### Test2
 Create a **Student** object with the non-default constructor
 ##### Test Data
@@ -57,7 +57,7 @@ Create a **Student** object with the non-default constructor
 + phoneNum: "912345678"
 + subject: SubjectCollection(Maths, English)
 ##### Actual Results:
-
+![alt non-defualt constructor](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%203.53.52%20PM.png?raw=true)
 ### Test3
 Create a **Student** object with invalid attributes
 ##### Test Data
@@ -65,6 +65,7 @@ Create a **Student** object with invalid attributes
 + phoneNum: "888888888"
 + subject: "Computing"
 ##### Expected Results:
+![alt invalid attributes]()
 ##### Actual Results:
 ----
 ## Student method tests
@@ -75,18 +76,22 @@ Create a **Student** object with invalid attributes
 ##### Expected Data
  + name: "William Smith"
 ##### Actual Data
+![alt valid name](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.01.57%20PM.png?raw=true)
 
 
 ### getPhoneNum(): String 
 ##### Expected Data
 + phone: "987654321"
 ##### Actual Data
+![alt valid phone number](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.02.22%20PM.png?raw=true)
 
 
 ### getSubjects(): String
 ##### Expected Data
 + subjects: "English Maths"
 ##### Actual Data
+![alt valid subject](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.02.48%20PM.png?raw=true)
+
 
 ---
 ### SetName(String): boolean  -positive
@@ -95,6 +100,7 @@ Create a **Student** object with invalid attributes
 ##### Expected Data
 + boolean: true
 ##### Actual Data
+![alt set name positive](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.03.17%20PM.png?raw=true)
 
 ### SetName(String): boolean -negative
 ##### Test Data
@@ -102,6 +108,7 @@ Create a **Student** object with invalid attributes
 ##### Expected Data
 + boolean: false
 ##### Actual Data
+![alt set name negative](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.03.46%20PM.png?raw=true)
 
 ### SetPhoneNum(String): boolean -positive
 ##### Test Data
@@ -109,6 +116,7 @@ Create a **Student** object with invalid attributes
 ##### Expected Data
 + boolean: true
 ##### Actual Data
+![alt set phone number positive](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.04.14%20PM.png?raw=true)
 
 ### SetPhoneNum(String): boolean -negative
 ##### Test Data
@@ -116,6 +124,7 @@ Create a **Student** object with invalid attributes
 ##### Expected Data
 + boolean: false
 ##### Actual Data
+![alt set phone number negative](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.04.40%20PM.png?raw=true)
 
 ### SetSubjects(String): boolean -positive
 ##### Test Data
@@ -123,6 +132,7 @@ Create a **Student** object with invalid attributes
 ##### Expected Data
 + boolean: true
 ##### Actual Data
+![alt set subjects positive](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.05.05%20PM.png?raw=true)
 
 ### SetSubjects(String): boolean -negative
 ##### Test Data
@@ -130,6 +140,7 @@ Create a **Student** object with invalid attributes
 ##### Expected Data
 + boolean: false
 ##### Actual Data
+![alt set subjects negative](https://github.com/dontry/monash_project/blob/inheritance/fit9131_project2/student_management_system/img/Screen%20Shot%202016-10-16%20at%204.05.26%20PM.png?raw=true)
 
 
 
