@@ -1,12 +1,8 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
+Readme
+-----------------------------------------
++ **PROJECT TITLE**: Student Management System
++ **PURPOSE OF PROJECT**: FIT9131 Assignment2
++ **VERSION or DATE**: 1.0.1
++ **HOW TO START THIS PROJECT**: Instantiate StudentMangementSystem and choose run system.
++ **AUTHOR**: Dong Cai
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT: estantiate StudentMangementSystem and choose run system.
-AUTHORS: Dong Cai
-USER INSTRUCTIONS:
